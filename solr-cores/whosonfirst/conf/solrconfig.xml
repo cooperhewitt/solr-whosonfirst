@@ -652,7 +652,7 @@
      <lst name="defaults">
        <str name="echoParams">explicit</str>
        <int name="rows">10</int>
-       <!-- <str name="df">text</str> -->
+       <str name="df">name</str>
      </lst>
     <!-- In addition to defaults, "appends" params can be specified
          to identify values which should be appended to the list of
@@ -854,17 +854,18 @@
          on each Update Request
       -->
 
+    <!--
        <lst name="defaults">
          <str name="update.chain">uuid</str>
        </lst>
-
+       -->
   </requestHandler>
 
   <!-- for back compat with clients using /update/json and /update/csv -->  
   <requestHandler name="/update/json" class="solr.JsonUpdateRequestHandler">
         <lst name="defaults">
          <str name="stream.contentType">application/json</str>
-         <str name="update.chain">uuid</str>
+         <!-- <str name="update.chain">uuid</str> -->
        </lst>
   </requestHandler>
   <requestHandler name="/update/csv" class="solr.CSVRequestHandler">
