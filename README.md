@@ -32,10 +32,6 @@ The (default) schema
 
    <field name="name_phonetic" type="phonetic" indexed="true" stored="false" multiValued="true"/>
 
-### name_ws
-
-   <field name="name_ws" type="text_ws" indexed="true" stored="false" multiValued="true"/>
-
 ### date_birth
    
    <field name="date_birth" type="tdate" indexed="true" stored="true" multiValued="true"/>
@@ -77,3 +73,5 @@ See also
 --
 
 * [Apache Solr](https://lucene.apache.org/solr/)
+
+* [Machine tags (at Flickr)](http://www.flickr.com/groups/api/discuss/72157594497877875/)

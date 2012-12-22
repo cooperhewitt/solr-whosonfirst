@@ -15,7 +15,6 @@
 
    <field name="name" type="text_general" indexed="true" stored="true" multiValued="true" required="true" />
    <field name="name_phonetic" type="phonetic" indexed="true" stored="false" multiValued="true"/>
-   <field name="name_ws" type="text_ws" indexed="true" stored="false" multiValued="true"/>
    
    <field name="date_birth" type="tdate" indexed="true" stored="true" multiValued="true"/>
    <field name="date_death" type="tdate" indexed="true" stored="true" multiValued="true"/>
@@ -27,7 +26,6 @@
    <uniqueKey>uri</uniqueKey>
 
    <copyField source="name" dest="name_phonetic"/>
-   <copyField source="name" dest="name_ws"/>
  
   <types>
 
@@ -51,12 +49,6 @@
     <fieldType name="tdate" class="solr.TrieDateField" precisionStep="6" positionIncrementGap="0"/>
 
     <fieldtype name="binary" class="solr.BinaryField"/>
-
-    <fieldType name="text_ws" class="solr.TextField" positionIncrementGap="100">
-      <analyzer>
-        <tokenizer class="solr.WhitespaceTokenizerFactory"/>
-      </analyzer>
-    </fieldType>
 
     <fieldType name="text_general" class="solr.TextField" positionIncrementGap="100">
       <analyzer type="index">
