@@ -26,7 +26,11 @@ The (default) schema
 
 ### name
 
-   <field name="name" type="text_general" indexed="true" stored="true" multiValued="true" required="true" />
+   <field name="name" type="string" indexed="true" stored="true" multiValued="true" required="true" />
+
+### name_general
+
+   <field name="name_general" type="text_general" indexed="true" stored="false" multiValued="true"/>
 
 ### name_phonetic
 
