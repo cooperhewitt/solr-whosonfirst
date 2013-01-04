@@ -30,11 +30,15 @@ The (default) schema
 
 ### name_general
 
-   <field name="name_general" type="text_general" indexed="true" stored="false" multiValued="true"/>
+   <field name="name_general" type="name_general" indexed="true" stored="false" multiValued="true"/>
 
-### name_phonetic
+This is a copy field derived from `name`.
+
+### name_phonetic (copy field from `name`)
 
    <field name="name_phonetic" type="phonetic" indexed="true" stored="false" multiValued="true"/>
+
+This is a copy field derived from `name`.
 
 ### date_birth
    
@@ -46,8 +50,19 @@ The (default) schema
 
 ### concordances
 
-   <field name="concordances" type="machinetag_hierarchy" indexed="true" stored="true" required="false" multiValued="true" /> 
+   <field name="concordances" type="string" indexed="false" stored="true" required="false" multiValued="true" /> 
 
+### concordances_machinetags
+
+   <field name="concordances_machinetags" type="machinetags" indexed="true" stored="false" multiValued="true" />
+
+_TBW: "lazy8s"_
+
+### concordances_machinetags_hierarchy
+
+   <field name="concordances_machinetags_hierarchy" type="machinetags_hierarchy" indexed="true" stored="false" multiValued="true" />
+
+_TBW: "SolrPathHierarchyTokenizerFactory"_
 
 How do I install it?
 --

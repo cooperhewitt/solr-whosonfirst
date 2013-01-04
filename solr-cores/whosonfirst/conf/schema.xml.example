@@ -13,18 +13,23 @@
 
    <!-- first name, last name ? -->
 
-   <field name="name" type="text_general" indexed="true" stored="true" multiValued="true" required="true" />
-   <field name="name_phonetic" type="phonetic" indexed="true" stored="false" multiValued="true"/>
+   <field name="name" type="string" indexed="true" stored="true" multiValued="true" required="true" />
+   <field name="name_general" type="name_general" indexed="true" stored="false" multiValued="true"/>
+   <field name="name_phonetic" type="name_phonetic" indexed="true" stored="false" multiValued="true"/>
    
    <field name="date_birth" type="tdate" indexed="true" stored="true" multiValued="true"/>
    <field name="date_death" type="tdate" indexed="true" stored="true" multiValued="true"/>
 
-   <field name="concordances" type="machinetag_hierarchy" indexed="true" stored="true" required="false" multiValued="true" /> 
+   <field name="concordances" type="string" indexed="false" stored="true" required="false" multiValued="true" /> 
+
+   <field name="concordances_machinetags" type="machinetags" indexed="true" stored="false" multiValued="true" />
+   <field name="concordances_machinetags_hierarchy" type="machinetags_hierarchy" indexed="true" stored="false" multiValued="true" />
 
  </fields>
 
    <uniqueKey>uri</uniqueKey>
 
+   <copyField source="name" dest="name_general"/>
    <copyField source="name" dest="name_phonetic"/>
  
   <types>
@@ -50,7 +55,7 @@
 
     <fieldtype name="binary" class="solr.BinaryField"/>
 
-    <fieldType name="text_general" class="solr.TextField" positionIncrementGap="100">
+    <fieldType name="name_general" class="solr.TextField" positionIncrementGap="100">
       <analyzer type="index">
         <tokenizer class="solr.StandardTokenizerFactory"/>
         <filter class="solr.LowerCaseFilterFactory"/>
@@ -62,26 +67,39 @@
       </analyzer>
     </fieldType>
 
-    <fieldtype name="phonetic" stored="false" indexed="true" class="solr.TextField" >
+    <fieldtype name="name_phonetic" stored="false" indexed="true" class="solr.TextField" >
       <analyzer>
         <tokenizer class="solr.StandardTokenizerFactory"/>
         <filter class="solr.DoubleMetaphoneFilterFactory" inject="false"/>
       </analyzer>
     </fieldtype>
 
-    <fieldType name="machinetag_hierarchy" class="solr.TextField" positionIncrementGap="100">
+    <!-- lazy 8s -->
 
-      <analyzer type="index">
-        <tokenizer class="solr.PathHierarchyTokenizerFactory"/>
-        <filter class="solr.LowerCaseFilterFactory"/>
-      </analyzer>
+    <fieldType name="machinetags" class="solr.TextField" positionIncrementGap="100">
 
-      <analyzer type="query">
-        <tokenizer class="solr.PathHierarchyTokenizerFactory"/>
+      <analyzer>
+        <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+        <filter class="solr.TrimFilterFactory"/>
         <filter class="solr.LowerCaseFilterFactory"/>
       </analyzer>
 
     </fieldType>
+
+    <!-- http://localhost:8983/solr/pinboard/select?q=*:*&rows=0&wt=xml&facet=true&facet.field=machinetags&facet.mincount=1 -->
+    <!-- http://localhost:8983/solr/pinboard/select?q=*:*&rows=0&wt=xml&facet=true&facet.field=machinetags&facet.mincount=1&facet.prefix=md5 -->
+
+    <fieldType name="machinetags_hierarchy" class="solr.TextField" positionIncrementGap="100">
+
+      <analyzer>
+        <tokenizer class="solr.PathHierarchyTokenizerFactory"/>
+        <filter class="solr.TrimFilterFactory"/>
+        <filter class="solr.LowerCaseFilterFactory"/>
+      </analyzer>
+
+    </fieldType>
+
+    <!-- see also: https://issues.apache.org/jira/browse/SOLR-64 -->
 
  </types>
 
