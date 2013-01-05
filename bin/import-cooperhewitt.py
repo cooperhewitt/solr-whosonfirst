@@ -4,11 +4,12 @@ import sys
 import pysolr
 import unicodecsv
 import machinetag
+import bz2
 
 if __name__ == '__main__':
 
     people = sys.argv[1]
-    fh = open(people, 'r')
+    fh = bz2.BZ2File(people, 'r')
 
     reader = unicodecsv.UnicodeReader(fh)
     docs = []
@@ -20,7 +21,7 @@ if __name__ == '__main__':
 
         doc = {
             'uri': 'x-urn:ch:id=%s' % row['id'],
-            'collection': 'cooper-hewitt',
+            'collection': 'cooperhewitt',
             'collection_id': row['id'],
             'name' : row['name']
             }
@@ -53,3 +54,5 @@ if __name__ == '__main__':
     if len(docs) == 1000:
         solr.add(docs)
         docs = []
+
+    solr.optimize()
