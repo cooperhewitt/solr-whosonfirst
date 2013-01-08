@@ -109,11 +109,17 @@ For example:
 
 	<field name="concordances_machinetags" type="machinetags" indexed="true" stored="false" multiValued="true" />
 
+This is not a copy field but is a list derived by `concordances` and expected to
+generated in code. These values are indexed but not stored. 
+
 _TBW: "lazy8s"_ (and Flickr machine tags)
 
 ### concordances_machinetags_hierarchy _optional_
 
 	<field name="concordances_machinetags_hierarchy" type="machinetags_hierarchy" indexed="true" stored="false" multiValued="true" />
+
+This is not a copy field but is a list derived by `concordances` and expected to
+generated in code. These values are indexed but not stored. 
 
 _TBW: "SolrPathHierarchyTokenizerFactory"_
 
