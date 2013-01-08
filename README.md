@@ -91,6 +91,8 @@ to the `schema.xml.example` file.
 See also
 --
 
+* [solr-whosonfirst-data](https://github.com/cooperhewitt/solr-whosonfirst-data)
+
 * [Apache Solr](https://lucene.apache.org/solr/)
 
 * [Machine tags (at Flickr)](http://www.flickr.com/groups/api/discuss/72157594497877875/)
