@@ -69,13 +69,13 @@ For example:
 
 	"name":["Bill Moggridge"]
 
-### name_general
+### name_general _derived_
 
    <field name="name_general" type="name_general" indexed="true" stored="false" multiValued="true"/>
 
 This is a copy field derived from `name` and is indexed by not stored.
 
-### name_phonetic (copy field from `name`)
+### name_phonetic _derived_
 
    <field name="name_phonetic" type="phonetic" indexed="true" stored="false" multiValued="true"/>
 
@@ -85,9 +85,17 @@ This is a copy field derived from `name` and is indexed by not stored.
    
    <field name="date_birth" type="tdate" indexed="true" stored="true" multiValued="true"/>
 
+For example:
+
+	"date_birth": "1943-06-25T00:00:00Z"
+
 ### date_death _optional_
 
    <field name="date_death" type="tdate" indexed="true" stored="true" multiValued="true"/>
+
+For example:
+
+	"date_death": "2012-09-08T00:00:00Z"
 
 ### concordances _optional_
 
@@ -140,4 +148,4 @@ See also
 
 * [Apache Solr](https://lucene.apache.org/solr/)
 
-* [Machine tags (at Flickr)](http://www.flickr.com/groups/api/discuss/72157594497877875/)
+* [Machine tags (at Flickr)](http://www.flickr.com/groups/api/discuss/72157594497877875/)_
