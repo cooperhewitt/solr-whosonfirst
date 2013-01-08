@@ -22,7 +22,7 @@ For example:
 				"concordances":["wikipedia:id= 1600591",
 				"freebase:id=/m/05fpg1"],
 				"uri":"x-urn:ch:id=18062553" ,
-				"collection":"cooper-hewitt" ,
+				"collection":"cooperhewitt" ,
 				"name":["Bill Moggridge"],
 				"_version_":1423275305600024577},
 			{
