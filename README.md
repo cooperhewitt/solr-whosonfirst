@@ -39,7 +39,7 @@ The (default) schema
 
 ### uri
 
-   <field name="uri" type="string" indexed="true" stored="true" required="true" />
+	<field name="uri" type="string" indexed="true" stored="true" required="true" />
 
 For example:
 
@@ -47,7 +47,7 @@ For example:
 
 ### collection
 
-   <field name="collection" type="string" indexed="true" stored="true" required="true" multiValued="false" /> 
+	<field name="collection" type="string" indexed="true" stored="true" required="true" multiValued="false" /> 
 
 For example:
 
@@ -55,7 +55,7 @@ For example:
 
 ### collection_id
 
-   <field name="collection_id" type="string" indexed="true" stored="true" required="true" multiValued="false" /> 
+	<field name="collection_id" type="string" indexed="true" stored="true" required="true" multiValued="false" /> 
 
 For example:
 
@@ -63,7 +63,7 @@ For example:
 
 ### name
 
-   <field name="name" type="string" indexed="true" stored="true" multiValued="true" required="true" />
+	<field name="name" type="string" indexed="true" stored="true" multiValued="true" required="true" />
 
 For example:
 
@@ -71,19 +71,19 @@ For example:
 
 ### name_general _derived_
 
-   <field name="name_general" type="name_general" indexed="true" stored="false" multiValued="true"/>
+	<field name="name_general" type="name_general" indexed="true" stored="false" multiValued="true"/>
 
 This is a copy field derived from `name` and is indexed by not stored.
 
 ### name_phonetic _derived_
 
-   <field name="name_phonetic" type="phonetic" indexed="true" stored="false" multiValued="true"/>
+	<field name="name_phonetic" type="phonetic" indexed="true" stored="false" multiValued="true"/>
 
 This is a copy field derived from `name` and is indexed by not stored.
 
 ### date_birth _optional_
    
-   <field name="date_birth" type="tdate" indexed="true" stored="true" multiValued="true"/>
+	<field name="date_birth" type="tdate" indexed="true" stored="true" multiValued="true"/>
 
 For example:
 
@@ -91,7 +91,7 @@ For example:
 
 ### date_death _optional_
 
-   <field name="date_death" type="tdate" indexed="true" stored="true" multiValued="true"/>
+	<field name="date_death" type="tdate" indexed="true" stored="true" multiValued="true"/>
 
 For example:
 
@@ -99,7 +99,7 @@ For example:
 
 ### concordances _optional_
 
-   <field name="concordances" type="string" indexed="false" stored="true" required="false" multiValued="true" /> 
+	<field name="concordances" type="string" indexed="false" stored="true" required="false" multiValued="true" /> 
 
 For example:
 
@@ -107,13 +107,13 @@ For example:
 
 ### concordances_machinetags  _optional_
 
-   <field name="concordances_machinetags" type="machinetags" indexed="true" stored="false" multiValued="true" />
+	<field name="concordances_machinetags" type="machinetags" indexed="true" stored="false" multiValued="true" />
 
 _TBW: "lazy8s"_ (and Flickr machine tags)
 
 ### concordances_machinetags_hierarchy _optional_
 
-   <field name="concordances_machinetags_hierarchy" type="machinetags_hierarchy" indexed="true" stored="false" multiValued="true" />
+	<field name="concordances_machinetags_hierarchy" type="machinetags_hierarchy" indexed="true" stored="false" multiValued="true" />
 
 _TBW: "SolrPathHierarchyTokenizerFactory"_
 
@@ -148,4 +148,4 @@ See also
 
 * [Apache Solr](https://lucene.apache.org/solr/)
 
-* [Machine tags (at Flickr)](http://www.flickr.com/groups/api/discuss/72157594497877875/)_
+* [Machine tags (at Flickr)](http://www.flickr.com/groups/api/discuss/72157594497877875/)
