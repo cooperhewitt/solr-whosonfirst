@@ -9,6 +9,31 @@ between institutions using a number of tokenizers and analyzers.
 How does it work?
 --
 
+TBW.
+
+For example:
+
+	$> curl 'http://localhost:8984/solr/select?q=name_general:moggridge&wt=json&indent=on&fq=name_general:bill'
+
+	{
+		"response":{"numFound":2, "start":0,"docs":[
+			{
+				"collection_id":"18062553" ,
+				"concordances":["wikipedia:id= 1600591",
+				"freebase:id=/m/05fpg1"],
+				"uri":"x-urn:ch:id=18062553" ,
+				"collection":"cooper-hewitt" ,
+				"name":["Bill Moggridge"],
+				"_version_":1423275305600024577},
+			{
+				"collection_id":"OL3253093A" ,
+				"uri":"x-urn:ol:id=OL3253093A" ,
+				"collection":"openlibrary" ,
+				"name":["Bill Moggridge"],
+				"_version_":1423278698929324032}]
+		}
+	}
+
 The (default) schema
 --
 
@@ -16,49 +41,69 @@ The (default) schema
 
    <field name="uri" type="string" indexed="true" stored="true" required="true" />
 
+For example:
+
+	"uri":"x-urn:ch:id=18062553"
+
 ### collection
 
    <field name="collection" type="string" indexed="true" stored="true" required="true" multiValued="false" /> 
+
+For example:
+
+	"collection":"cooperhewitt"
 
 ### collection_id
 
    <field name="collection_id" type="string" indexed="true" stored="true" required="true" multiValued="false" /> 
 
+For example:
+
+	"collection_id":"18062553"
+
 ### name
 
    <field name="name" type="string" indexed="true" stored="true" multiValued="true" required="true" />
+
+For example:
+
+	"name":["Bill Moggridge"]
 
 ### name_general
 
    <field name="name_general" type="name_general" indexed="true" stored="false" multiValued="true"/>
 
-This is a copy field derived from `name`.
+This is a copy field derived from `name` and is indexed by not stored.
 
 ### name_phonetic (copy field from `name`)
 
    <field name="name_phonetic" type="phonetic" indexed="true" stored="false" multiValued="true"/>
 
-This is a copy field derived from `name`.
+This is a copy field derived from `name` and is indexed by not stored.
 
-### date_birth
+### date_birth _optional_
    
    <field name="date_birth" type="tdate" indexed="true" stored="true" multiValued="true"/>
 
-### date_death
+### date_death _optional_
 
    <field name="date_death" type="tdate" indexed="true" stored="true" multiValued="true"/>
 
-### concordances
+### concordances _optional_
 
    <field name="concordances" type="string" indexed="false" stored="true" required="false" multiValued="true" /> 
 
-### concordances_machinetags
+For example:
+
+	"concordances":["wikipedia:id= 1600591", "freebase:id=/m/05fpg1"]
+
+### concordances_machinetags  _optional_
 
    <field name="concordances_machinetags" type="machinetags" indexed="true" stored="false" multiValued="true" />
 
-_TBW: "lazy8s"_
+_TBW: "lazy8s"_ (and Flickr machine tags)
 
-### concordances_machinetags_hierarchy
+### concordances_machinetags_hierarchy _optional_
 
    <field name="concordances_machinetags_hierarchy" type="machinetags_hierarchy" indexed="true" stored="false" multiValued="true" />
 
