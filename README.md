@@ -81,21 +81,21 @@ This is a copy field derived from `name` and is indexed by not stored.
 
 This is a copy field derived from `name` and is indexed by not stored.
 
-### date_birth _optional_
+### year_birth _optional_
    
-	<field name="date_birth" type="tdate" indexed="true" stored="true" multiValued="true"/>
+	<field name="date_birth" type="tint" indexed="true" stored="true" multiValued="true"/>
 
 For example:
 
-	"date_birth": "1943-06-25T00:00:00Z"
+	"year_birth": "1943"
 
 ### date_death _optional_
 
-	<field name="date_death" type="tdate" indexed="true" stored="true" multiValued="true"/>
+	<field name="year_death" type="tint" indexed="true" stored="true" multiValued="true"/>
 
 For example:
 
-	"date_death": "2012-09-08T00:00:00Z"
+	"date_death": "2012"
 
 ### concordances _optional_
 

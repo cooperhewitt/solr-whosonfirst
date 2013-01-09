@@ -17,8 +17,8 @@
    <field name="name_general" type="name_general" indexed="true" stored="false" multiValued="true"/>
    <field name="name_phonetic" type="name_phonetic" indexed="true" stored="false" multiValued="true"/>
    
-   <field name="date_birth" type="tdate" indexed="true" stored="true" multiValued="true"/>
-   <field name="date_death" type="tdate" indexed="true" stored="true" multiValued="true"/>
+   <field name="year_birth" type="tint" indexed="true" stored="true" multiValued="true"/>
+   <field name="year_death" type="tint" indexed="true" stored="true" multiValued="true"/>
 
    <field name="concordances" type="string" indexed="false" stored="true" required="false" multiValued="true" /> 
 
