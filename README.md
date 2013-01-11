@@ -214,17 +214,17 @@ also be encoded using "magic 8s". It ain't pretty but it works.
 For example, given the machinetag `flickr:user=straup` you'd end up storing the
 following: 
 
-* raw: `flickr:` encoded: `flickr8c` – anything whose namespace is `flickr`
+* raw: `flickr:` encoded: `flickr8c` _anything whose namespace is `flickr`_
 
-* raw: `flickr:user=` encoded: `flickr8cuser8e` - anything whose namespace is `flickr` with the predicate `user`
+* raw: `flickr:user=` encoded: `flickr8cuser8e` _anything whose namespace is `flickr` with the predicate `user`_
 
-* raw: `flickr:user=straup` encoded: `flickr8cuser8estraup` - anything with an exact match
+* raw: `flickr:user=straup` encoded: `flickr8cuser8estraup` _anything with an exact match_
 
-* raw: `=straup` encoded: `8estraup` - anything whose value is `straup`
+* raw: `=straup` encoded: `8estraup` _anything whose value is `straup`_
 
-* raw: `:user=`	encoded: `8cuser8e` - anything with a predicate that is `user`
+* raw: `:user=`	encoded: `8cuser8e` _anything with a predicate that is `user`_
 
-* raw: `:user=straup` encoded: `8cuser8estraup` - anything with a predicate that is `user` and a value of `straup`
+* raw: `:user=straup` encoded: `8cuser8estraup` _anything with a predicate that is `user` and a value of `straup`_
 
 If you want working code (or just a reference implementation) for machinetags
 and "magic 8s" take a look at the
@@ -245,9 +245,9 @@ _TBW: "SolrPathHierarchyTokenizerFactory"_
 See also
 --
 
-* [solr-whosonfirst-data](https://github.com/cooperhewitt/solr-whosonfirst-data)
-
 * [Apache Solr](https://lucene.apache.org/solr/)
+
+* [solr-whosonfirst-data](https://github.com/cooperhewitt/solr-whosonfirst-data)
 
 * [A machinetags reading list](https://github.com/straup/machinetags-readinglist)
 
