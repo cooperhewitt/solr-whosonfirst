@@ -240,7 +240,11 @@ the history, theory and practice of machinetags.
 This is not a copy field but is a list derived by `concordances` and expected to
 generated in code. These values are indexed but not stored. 
 
-_TBW: "SolrPathHierarchyTokenizerFactory"_
+The `concordances_machinetags_hierarchy` field stores each machinetag as a
+hierarchical path structure (so `flickr:user=straup` would be stored as
+`flickr/user/straup`) in order to take advantage of the
+`SolrPathHierarchyTokenizerFactory` tokenizer and Solr's ability to do
+[hierarchical faceting](https://wiki.apache.org/solr/HierarchicalFaceting).
 
 See also
 --
