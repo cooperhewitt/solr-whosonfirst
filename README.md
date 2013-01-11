@@ -1,15 +1,26 @@
 solr-whosonfirst
 ==
 
-**THIS IS A WORK IN PROGRESS**
-
 `solr-whosonfirst` is an experimental Solr 4 core for mapping person names
 between institutions using a number of tokenizers and analyzers.
 
 How does it work?
 --
 
-TBW.
+The core contains the minimum viable set of data fields for doing concordances
+between people from a variety of institutions: collection; collection_id; name
+and when available year_birth; year_death.
+
+The value of `name` is then meant to copied (literally, using Solr `copyField`
+definitions) to a variety of specialized field definitions. For example the
+`name` field is copied to a `name_phonetic` so that you can query the entire
+corpus for names that sound alike.
+
+The idea is to compile a broad collection of specialized fields to offer a
+variety of ways to compare data sets. The point is not to presume that any one
+tokenizer / analyzer will be able to meet everyone's needs but to provide a
+common playground in which we might try things out and share tricks and lessons
+learned.
 
 For example:
 
@@ -19,8 +30,9 @@ For example:
 		"response":{"numFound":2, "start":0,"docs":[
 			{
 				"collection_id":"18062553" ,
-				"concordances":["wikipedia:id= 1600591",
-				"freebase:id=/m/05fpg1"],
+				"concordances":[
+					"wikipedia:id= 1600591",
+					"freebase:id=/m/05fpg1"],
 				"uri":"x-urn:ch:id=18062553" ,
 				"collection":"cooperhewitt" ,
 				"name":["Bill Moggridge"],
@@ -34,6 +46,78 @@ For example:
 		}
 	}
 
+Or:
+
+	$> http://localhost:8983/solr/whosonfirst/select?q=name_general:dreyfuss&wt=json&indent=on
+
+	{
+		"response":{"numFound":3,"start":0,"docs":[
+			{
+				"concordances":["ulan:id=500059346"],
+				"name":["Dreyfuss, Henry"],
+				"uri":"x-urn:imamuseum:id=656174",
+				"collection":"imamuseum",
+				"collection_id":"656174",
+				"year_death":[1972],
+				"year_birth":[1904],
+				"_version_":1423872453083398149},
+			{
+				"concordances":["ulan:id=500059346",
+						"wikipedia:id=1697559",
+						"freebase:id=/m/05p6rp",
+						"viaf:id=8198939",
+						"ima:id=656174"],
+				"name":["Henry Dreyfuss"],
+				"uri":"x-urn:ch:id=18041501",
+				"collection":"cooperhewitt",
+				"collection_id":"18041501",
+				"_version_":1423872563648397315},
+			{
+				"concordances":["wikipedia:id=1697559",
+						"moma:id=1619"],
+				"name":["Henry Dreyfuss Associates"],
+				"uri":"x-urn:ch:id=18041029",
+				"collection":"cooperhewitt",
+				"collection_id":"18041029",
+				"_version_":1423872563567656970}]
+			}
+	}
+
+Sample data files and tools for importing them in to the `whosonfirst` Solr core
+are available separately in the
+[solr-whosonfirst-data](https://github.com/cooperhewitt/solr-whosonfirst-data)
+repository.
+
+How do I install it?
+--
+
+`solr-whosonfirst` does not come with a copy of Solr. Installing and configuring
+a Solr server is left as an exercise to the reader (don't worry there's lot of
+good documentation for Solr and so long as you're not trying to do anything
+fancy it's all pretty straightforward).
+
+In your `solr.xml` config file add the following line:
+
+	<core name="whosonfirst" instanceDir="/path/to/solr-whosonfirst/solr-cores/whosonfirst" />
+
+In your `/path/to/solr-whosonfirst/solr-cores/whosonfirst/conf` directory do one
+of the following:
+
+	$> cp schema.xml.example schema.xml
+
+Or:
+
+	$> ln -s schema.xml.example schema.xml
+
+The point being: Your `schema.xml` file is your own and is explicitly excluded
+from being checked-in to the `solr-whosonfirst` repository. If you've got a
+handy new tokenizer/analyzer that you'd like to share with the community add it
+to the `schema.xml.example` file.
+
+**Important**: Any data you add to the `solr-whosonfirst` core is stored in the
+`solr-cores/whosonfirst/data` directory whose contents are explicitly excluded
+from being checked in this Git repository.
+
 The (default) schema
 --
 
@@ -44,6 +128,8 @@ The (default) schema
 For example:
 
 	"uri":"x-urn:ch:id=18062553"
+
+_This is the primary key for each record._
 
 ### collection
 
@@ -122,30 +208,6 @@ This is not a copy field but is a list derived by `concordances` and expected to
 generated in code. These values are indexed but not stored. 
 
 _TBW: "SolrPathHierarchyTokenizerFactory"_
-
-How do I install it?
---
-
-TBW.
-
-In your `solr.xml` config file add the following line:
-
-	<core name="whosonfirst" instanceDir="/path/to/solr-whosonfirst/solr-cores/whosonfirst" />
-
-In your `/path/to/solr-whosonfirst/solr-cores/whosonfirst/conf` directory do one
-of the following:
-
-	$> cp schema.xml.example schema.xml
-
-Or:
-
-	$> ln -s schema.xml.example schema.xml
-
-The point being: Your `schema.xml` file is your own and is explicitly excluded
-from being checked-in to the `solr-whosonfirst` repository. If you've got a
-handy new tokenizer/analyzer that you'd like to share with the community add it
-to the `schema.xml.example` file.
-
 
 See also
 --
