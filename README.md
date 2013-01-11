@@ -83,6 +83,10 @@ Or:
 			}
 	}
 
+And so on. Queries can be made more complex by filtering, or comparing dates, or
+by institution or by querying the `concordances_machinetags` related fields
+described below. That's your business.
+
 Sample data files and tools for importing them in to the `whosonfirst` Solr core
 are available separately in the
 [solr-whosonfirst-data](https://github.com/cooperhewitt/solr-whosonfirst-data)
@@ -191,6 +195,10 @@ For example:
 
 	"concordances":["wikipedia:id= 1600591", "freebase:id=/m/05fpg1"]
 
+This field is _not_ indexed as is left to individual applications to use it as
+they see fit. If you want to query known concordances use the
+`concordances_machinetags` and `concordances_machinetags_hierarchy`.
+
 ### concordances_machinetags  _optional_
 
 	<field name="concordances_machinetags" type="machinetags" indexed="true" stored="false" multiValued="true" />
@@ -198,7 +206,32 @@ For example:
 This is not a copy field but is a list derived by `concordances` and expected to
 generated in code. These values are indexed but not stored. 
 
-_TBW: "lazy8s"_ (and Flickr machine tags)
+The `concordances_machinetags` field stores all the possible combinations that
+you might use to query a machinetag. Because some of the characters used to
+encode machinetags conflict with reserved characters in Solr each token needs to
+also be encoded using "magic 8s". It ain't pretty but it works.
+
+For example, given the machinetag `flickr:user=straup` you'd end up storing the
+following: 
+
+* raw: `flickr:` encoded: `flickr8c` – anything whose namespace is `flickr`
+
+* raw: `flickr:user=` encoded: `flickr8cuser8e` - anything whose namespace is `flickr` with the predicate `user`
+
+* raw: `flickr:user=straup` encoded: `flickr8cuser8estraup` - anything with an exact match
+
+* raw: `=straup` encoded: `8estraup` - anything whose value is `straup`
+
+* raw: `:user=`	encoded: `8cuser8e` - anything with a predicate that is `user`
+
+* raw: `:user=straup` encoded: `8cuser8estraup` - anything with a predicate that is `user` and a value of `straup`
+
+If you want working code (or just a reference implementation) for machinetags
+and "magic 8s" take a look at the
+[py-machinetag](https://github.com/straup/py-machinetag) repository.
+
+There are links below in the `See also` section for anyone wanting to read up on
+the history, theory and practice of machinetags.
 
 ### concordances_machinetags_hierarchy _optional_
 
@@ -216,4 +249,5 @@ See also
 
 * [Apache Solr](https://lucene.apache.org/solr/)
 
-* [Machine tags (at Flickr)](http://www.flickr.com/groups/api/discuss/72157594497877875/)
+* [A machinetags reading list](https://github.com/straup/machinetags-readinglist)
+
