@@ -4,6 +4,8 @@ solr-whosonfirst
 `solr-whosonfirst` is an experimental Solr 4 core for mapping person names
 between institutions using a number of tokenizers and analyzers.
 
+[We even wrote a blog post about it.](http://labs.cooperhewitt.org/2013/first/)
+
 How does it work?
 --
 
